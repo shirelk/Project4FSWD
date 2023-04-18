@@ -30,41 +30,20 @@ function App(props) {
     props.setInputValue(props.inputValue + " ");
   };
 
-  const NumKeys = numbers.split("").map((char) => (
-    <button key={char} onClick={() => handleClick(char)}>
-      {char}
-    </button>
-  ));
-  const EngKeys1 = EngAlphabet1.split("").map((char) => (
-    <button key={char} onClick={() => handleClick(char)}>
-      {char}
-    </button>
-  ));
-  const EngKeys2 = EngAlphabet2.split("").map((char) => (
-    <button key={char} onClick={() => handleClick(char)}>
-      {char}
-    </button>
-  ));
-  const EngKeys3 = EngAlphabet3.split("").map((char) => (
-    <button key={char} onClick={() => handleClick(char)}>
-      {char}
-    </button>
-  ));
-  const HebKeys1 = HebAlphabet1.split("").map((char) => (
-    <button key={char} onClick={() => handleClick(char)}>
-      {char}
-    </button>
-  ));
-  const HebKeys2 = HebAlphabet2.split("").map((char) => (
-    <button key={char} onClick={() => handleClick(char)}>
-      {char}
-    </button>
-  ));
-  const HebKeys3 = HebAlphabet3.split("").map((char) => (
-    <button key={char} onClick={() => handleClick(char)}>
-      {char}
-    </button>
-  ));
+  const inputButtons = (alphabet) =>
+    alphabet.split("").map((char) => (
+      <button key={char} onClick={() => handleClick(char)}>
+        {char}
+      </button>
+    ));
+
+  const NumKeys = inputButtons(numbers);
+  const EngKeys1 = inputButtons(EngAlphabet1);
+  const EngKeys2 = inputButtons(EngAlphabet2);
+  const EngKeys3 = inputButtons(EngAlphabet3);
+  const HebKeys1 = inputButtons(HebAlphabet1);
+  const HebKeys2 = inputButtons(HebAlphabet2);
+  const HebKeys3 = inputButtons(HebAlphabet3);
 
   return (
     <div className="App">
