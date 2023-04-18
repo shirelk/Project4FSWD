@@ -20,6 +20,16 @@ function App(props) {
     setCapsLockOn(!capsLockOn); // toggle caps lock status
   };
 
+  // Delete button
+  const handleDelete = () => {
+    props.setInputValue(props.inputValue.slice(0, -1));
+  };
+
+  //space button
+  const handleSpace = () => {
+    props.setInputValue(props.inputValue + " ");
+  };
+
   const NumKeys = numbers.split("").map((char) => (
     <button key={char} onClick={() => handleClick(char)}>
       {char}
@@ -106,6 +116,10 @@ function App(props) {
           >
             Caps lock
           </button>
+          <button className="space" onClick={handleSpace}>
+            Space
+          </button>
+          <button onClick={handleDelete}>Delete</button>
         </div>
 
         <div className="NumbersKeyboard" style={{ visibility: "visible" }}>
