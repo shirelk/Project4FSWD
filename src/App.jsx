@@ -3,10 +3,10 @@ import "./App.css";
 
 function App(props) {
   // const [count, setCount] = useState(0);
-
-  const EngAlphabet1 = "qwertyuiop";
-  const EngAlphabet2 = "asdfghjkl";
-  const EngAlphabet3 = "zxcvbnm";
+  const [capsLockOn, setCapsLockOn] = useState(false); // state variable to track caps lock status
+  const EngAlphabet1 = capsLockOn ? "QWERTYUIOP" : "qwertyuiop";
+  const EngAlphabet2 = capsLockOn ? "ASDFGHJKL" : "asdfghjkl";
+  const EngAlphabet3 = capsLockOn ? "ZXCVBNM" : "zxcvbnm";
   const HebAlphabet1 = "קראטוןםפ";
   const HebAlphabet2 = "שדגכעיחלךף";
   const HebAlphabet3 = "זסבהנמצתץ";
@@ -14,6 +14,10 @@ function App(props) {
 
   const handleClick = (char) => {
     props.setInputValue(props.inputValue + char);
+  };
+
+  const handleCapsLockClick = () => {
+    setCapsLockOn(!capsLockOn); // toggle caps lock status
   };
 
   const NumKeys = numbers.split("").map((char) => (
@@ -57,10 +61,8 @@ function App(props) {
       <h1>Text editor :)</h1>
       <div className="card">
         <input type="text" value={props.inputValue} />
-        {/* <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button> */}
-        <div className="KeyboardOptions">
+
+        <div className="KeyboardInputs">
           <button
             onClick={() => {
               const hebKeyboard = document.querySelector(".HebKeyboard");
@@ -96,6 +98,17 @@ function App(props) {
             Numbers
           </button>
         </div>
+
+        <div className="KeyboardOptions">
+          <button
+            onClick={() => {
+              setCapsLockOn(!capsLockOn);
+            }}
+          >
+            Caps lock
+          </button>
+        </div>
+
         <div className="NumbersKeyboard" style={{ visibility: "visible" }}>
           {NumKeys}
         </div>
