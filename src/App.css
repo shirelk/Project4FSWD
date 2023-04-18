@@ -61,14 +61,14 @@
   padding: 2em;
 }
 
+.EngKeyboard {
+  position: absolute;
+}
+
+/* .HebKeyboard {
+
+}
+
 .NumbersKeyboard {
   visibility: collapse;
-}
-
-.EngKeyboard {
-  visibility: visible;
-}
-
-.HebKeyboard {
-  visibility: collapse;
-}
+} */

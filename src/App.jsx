@@ -66,25 +66,24 @@ function App(props) {
           <button
             onClick={() => {
               const hebKeyboard = document.querySelector(".HebKeyboard");
-              hebKeyboard.style.visibility =
-                hebKeyboard.style.visibility === "collapse"
-                  ? "visible"
-                  : "collapse";
+              const engKeyboard = document.querySelector(".EngKeyboard");
+              hebKeyboard.style.visibility = "visible";
+              engKeyboard.style.visibility = "collapse";
             }}
           >
             Hebrew
           </button>
           <button
             onClick={() => {
+              const hebKeyboard = document.querySelector(".HebKeyboard");
               const engKeyboard = document.querySelector(".EngKeyboard");
-              engKeyboard.style.visibility =
-                engKeyboard.style.visibility === "collapse"
-                  ? "visible"
-                  : "collapse";
+              hebKeyboard.style.visibility = "collapse";
+              engKeyboard.style.visibility = "visible";
             }}
           >
             English
           </button>
+
           <button
             onClick={() => {
               const numbersKeyboard =
