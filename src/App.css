@@ -70,9 +70,9 @@
 }
 
 /* .HebKeyboard {
-
+  visibility: collapse;
 }
 
 .NumbersKeyboard {
-  visibility: collapse;
+  visibility: visible;
 } */

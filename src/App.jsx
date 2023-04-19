@@ -157,17 +157,17 @@ export default class App extends Component {
   };
 
   handleClick = (char) => {
-    this.props.setInputValue(this.props.inputValue + char);
+    this.setInputValue(this.state.inputValue + char);
   };
 
   // Delete button
   handleDelete = () => {
-    this.props.setInputValue(this.props.inputValue.slice(0, -1));
+    this.setInputValue(this.state.inputValue.slice(0, -1));
   };
 
   // Space button
   handleSpace = () => {
-    this.props.setInputValue(this.props.inputValue + " ");
+    this.setInputValue(this.state.inputValue + " ");
   };
 
   inputButtons = (alphabet) =>
@@ -179,7 +179,7 @@ export default class App extends Component {
 
   render() {
     const { capsLockOn } = this.state;
-    // const { inputValue } = this.props;
+    //const { inputValue } = this.props;
     const { inputValue, output } = this.state;
     const EngAlphabet1 = capsLockOn ? "QWERTYUIOP" : "qwertyuiop";
     const EngAlphabet2 = capsLockOn ? "ASDFGHJKL" : "asdfghjkl";
