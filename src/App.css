@@ -2,7 +2,6 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
 
 /* .input {
@@ -23,7 +22,7 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 } */
 
-@keyframes logo-spin {
+/* @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -36,27 +35,28 @@
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
-}
+} */
 
 .card {
   padding: 2em;
 }
 
 .EngKeyboard {
-  position: absolute;
+  position:relative;
+  visibility: collapse;
 }
 
 .space {
   width: 200px;
 }
 
-/* .HebKeyboard {
+.HebKeyboard {
   visibility: collapse;
 }
 
 .NumbersKeyboard {
   visibility: visible;
-} */
+}
 
 .App{
   top: 200px;

@@ -1,38 +1,69 @@
 import React, { Component } from "react";
 import "./App.css";
+import HebrewKeyboard from "./components/HebrewKeyboard";
+import EnglishKeyboard from "./components/EnglishKeyboard";
+import OptionsKeyboard from "./components/OptionsKeyboard";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       // capsLockOn: false,
-      bold: false,
       underline: false,
+      italic: false,
       inputValue: "",
       output: "",
+      isBold: false,
+      fontSize: "16px",
+      fontName: "Arial",
+      color: "black",
+      alignment: "left"
     };
   }
 
-  setInputValue = (inputValue) => {
-    this.setState({ inputValue });
-  };
+  //Style function
+  boldUpdate = () => { this.setState({isBold: !this.state.isBold});}
+  underlineUpdate = () => {console.log("underline!"); this.setState({underline: !this.state.underline});}
+  italicUpdate = () => { this.setState({italic: !this.state.italic});}
 
-  setOutput = (output) => {
-    this.setState({ output });
+  fontSizeUpdate = (event)=>{this.setState({fontSize: event.target.value})}
+  fontNameUpdate = (event)=>{this.setState({fontName: event.target.value})}
+  colorUpdate = (event)=>{this.setState({color: event.target.value})}
+
+  alignFullUpdate =()   =>  {this.setState(   {alignment: "justify"}   );}
+  alignCenterUpdate =() =>  {this.setState(   {alignment: "center"}    );}
+  alignRightUpdate =()  =>  {this.setState(   {alignment: "right"}     );}
+  alignLeftUpdate =()   =>  {this.setState(   {alignment: "left"}      );}
+
+
+  //object the hold the fields of the style functions
+  setInputValue = (newChar) => {
+    let designChar = {
+      value: newChar,
+      fontSize: this.state.fontSize,
+      fontName: this.state.fontName,
+      color: this.state.color,
+      boldC: this.state.isBold? 'bold' : '',
+      underline: this.state.underline? 'underline':'',
+      italic: this.state.italic? 'italic':'',
+      align: this.state.alignment
+
+  }
+    this.setState((prev)=> ({ inputValue: [...prev.inputValue, designChar ] }));
   };
 
   handleClick = (char) => {
-    this.setInputValue(this.state.inputValue + char);
+    this.setInputValue(char);
   };
 
   // Delete button
   handleDelete = () => {
-    this.setInputValue(this.state.inputValue.slice(0, -1));
+    this.setState({inputValue: this.state.inputValue.slice(0, -1)} );
   };
 
   // Space button
   handleSpace = () => {
-    this.setInputValue(this.state.inputValue + " ");
+    this.setInputValue(" ");
   };
 
   inputButtons = (alphabet) =>
@@ -41,20 +72,26 @@ export default class App extends Component {
         {char}
       </button>
     ));
-  
-    
 
   render() {
+
+    //object that hold all the style funnctions
+    let styleFunctions = {
+      boldUpdate: this.boldUpdate,
+      underlineUpdate: this.underlineUpdate,
+      italicUpdate: this.italicUpdate,
+      fontNameUpdate: this.fontNameUpdate,
+      fontSizeUpdate: this.fontSizeUpdate,
+      alignFullUpdate: this.alignFullUpdate,
+      alignCenterUpdate: this.alignCenterUpdate,
+      alignRightUpdate: this.alignRightUpdate,
+      alignLeftUpdate: this.alignLeftUpdate,
+      colorUpdate: this.colorUpdate
+    }
+
     const { capsLockOn } = this.state;
-    //const { inputValue } = this.props;
     const { inputValue, output, bold } = this.state;
-    // const { inputValue, output } = this.state;
-    const EngAlphabet1 = capsLockOn ? "QWERTYUIOP" : "qwertyuiop";
-    const EngAlphabet2 = capsLockOn ? "ASDFGHJKL" : "asdfghjkl";
-    const EngAlphabet3 = capsLockOn ? "ZXCVBNM" : "zxcvbnm";
-    const HebAlphabet1 = "קראטוןםפ";
-    const HebAlphabet2 = "שדגכעיחלךף";
-    const HebAlphabet3 = "זסבהנמצתץ";
+
     const numbers = "0123456789";
     // const emojy1 = "😀😁😂🤣😃😄😅😆😉😊";
     // const emojy2 = "😋😎😍😘🥰😗😙🥲😚☺️";
@@ -62,94 +99,55 @@ export default class App extends Component {
     const specials2 = "/'[]{};:?.,";
 
     const NumKeys = this.inputButtons(numbers);
-    const EngKeys1 = this.inputButtons(EngAlphabet1);
-    const EngKeys2 = this.inputButtons(EngAlphabet2);
-    const EngKeys3 = this.inputButtons(EngAlphabet3);
-    const HebKeys1 = this.inputButtons(HebAlphabet1);
-    const HebKeys2 = this.inputButtons(HebAlphabet2);
-    const HebKeys3 = this.inputButtons(HebAlphabet3);
-    //const emojyKeys1 = this.inputButtons(emojy1);
-    const hebKeyboard = document.querySelector(".HebKeyboard");
-    const engKeyboard = document.querySelector(".EngKeyboard");
-  
+
+    let input=[...this.state.inputValue];
     return (
       <div className="App">
-        {/* <h1>Text editor :)</h1> */}
         <div className="card">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-          {/* <textarea className="container" value={inputValue} /> */}
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-        <div class="container">
-          <div class="options">
-                    {/* fontAwesomes icons */}
-                {/* Text format */}
-                <button id="bold" className="option-button format"> <i class="fa-solid fa-bold"></i></button>
-                <button id="italic" className="option-button format"> <i class="fa-solid fa-italic"></i></button>
-                <button id="underline" className="option-button format"><i class="fa-solid fa-underline"></i></button>
-                <button id="strikethrough" class="option-button format"><i class="fa-solid fa-strikethrough"></i></button>
-                <button id="superscript" class="option-button script"><i class="fa-solid fa-superscript"></i></button>
-                <button id="subscript" class="option-button script"><i class="fa-solid fa-subscript"></i></button>
-
-              {/*List style*/} 
-              <button id="insertOrderedList" class="option-button">
-                <div class="fa-solid fa-list-ol"></div>
-              </button>
-              <button id="insertUnorderedList" class="option-button"><i class="fa-solid fa-list"></i></button>
-              
-              { /*Undo-Redo*/}
-              <button id="uno" class="option-button"><i class="fa-solid fa-rotate-left"></i></button>
-              <button id="redo" class="option-button"><i class="fa-solid fa-rotate-right"></i></button>
-
-              {/* Alignment */}
-              <button id="justigyLeft" class="option-button align"><i class=" fa-solid fa-align-left"></i></button>
-              <button id="justigyRight" class="option-button align"><i class=" fa-solid fa-align-right"></i></button>
-              <button id="justigyLeft" class="option-button align"><i class=" fa-solid fa-align-center"></i></button>
-              <button id="justigyFull" class="option-button align"><i class=" fa-solid fa-align-justify"></i></button>
-              <button id="indent" className="option-button spacing"><i class="fa-solid fa-indent"></i></button>
-              <button id="outdent" className="option-button spacing"><i class="fa-solid fa-outdent"></i></button>
-
-              {/* Headings */}
-              <select id="formatBlock" class="adv-option-button">
-                <option value="H1">H1</option>
-                <option value="H2">H2</option>
-                <option value="H3">H3</option>
-                <option value="H4">H4</option>
-                <option value="H5">H5</option>
-                <option value="H6">H6</option>
-              </select>
-
-              {/* Font */}
-              <select id="fontName" class="adv-option-button"></select>
-              <select id="fontSize" class="adv-option-button"></select>
-
-              {/* Color */}
-              <div class="input-wrapper">
-                <input type="color" id="foreColor" class="adv-option-button"></input>
-                <label for="foreColor">Font Color</label>
-              </div>
-              <div class="input-wrapper">
-                <input type="color" id="backColor" class="adv-option-button"></input>
-                <label for="backColor">Hightlight Color</label>
-              </div>
+          <div className="container">
+            <OptionsKeyboard styleFunctionsProp ={styleFunctions}  />
+            <div id="text-input" style={{textAlign: this.state.alignment}}>
+              {input.map((char) =>(
+                <span
+                style={{ 
+                  fontWeight: `${char.boldC}`,                  
+                  textDecoration: `${char.underline}`,
+                  fontStyle: `${char.italic}`,
+                  fontSize: `${char.fontSize}px`,
+                  fontFamily: `${char.fontName}`,
+                  color: `${char.color}`,
+                }}
+                >
+                  {char.value}
+                </span>
+              ))}
             </div>
-          <div id="text-input" contentEditable="true"></div>
-          <script src="script.js"></script>
-        </div>
 
           {/* keyboard */}
           <div className="KeyboardInputs">
             <button
               onClick={() => {
-                hebKeyboard.style.visibility = "visible";
-                engKeyboard.style.visibility = "collapse";
+                const hebrewKeyboard =
+                  document.querySelector(".HebKeyboard");
+                hebrewKeyboard.style.visibility =
+                  hebrewKeyboard.style.visibility === "collapse"
+                    ? "visible"
+                    : "collapse";
+
               }}
             >
               Hebrew
             </button>
             <button
               onClick={() => {
-                hebKeyboard.style.visibility = "collapse";
-                engKeyboard.style.visibility = "visible";
+                const englishKeyboard =
+                  document.querySelector(".EngKeyboard");
+                englishKeyboard.style.visibility =
+                  englishKeyboard.style.visibility === "collapse"
+                    ? "visible"
+                    : "collapse";
               }}
             >
               English
@@ -185,28 +183,15 @@ export default class App extends Component {
           <div className="NumbersKeyboard" style={{ visibility: "visible" }}>
             {NumKeys}
           </div>
-          <div className="EngKeyboard" style={{ visibility: "visible" }}>
-            <div>{EngKeys1}</div>
-            <div>{EngKeys2}</div>
-            <div>{EngKeys3}</div>
-          </div>
-          <div className="HebKeyboard" style={{ visibility: "visible" }}>
-            <div>{HebKeys1}</div>
-            <div>{HebKeys2}</div>
-            <div>{HebKeys3}</div>
-          </div>
-          {/* <div className="EmojyKeyboard" style={{ visibility: "visible" }}>
-            <div>{emojyKeys1}</div>
-          </div> */}
 
-     
+          <EnglishKeyboard capsLockOn={this.state.capsLockOn} inputButtons={this.inputButtons} />
+          <HebrewKeyboard func={this.inputButtons} />
 
-          {/* <div className="output">{output}</div> */}
-        </div> 
         </div>
-      
+      </div>
+    </div>
+
     );
-        }
-      }
-      
-  
+  }
+}
+
