@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "../App.css";
 
 
 export default class EnglishKeyboard extends Component {
@@ -21,7 +22,7 @@ export default class EnglishKeyboard extends Component {
 
         return (
 
-            <div className="EngKeyboard" style={{ visibility: "visible" }}>
+            <div className="EngKeyboard" style={{ visibility: "hidden" }}>
                 <div>{EngKeys1}</div>
                 <div>{EngKeys2}</div>
                 <div>{EngKeys3}</div>

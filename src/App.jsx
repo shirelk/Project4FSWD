@@ -3,6 +3,8 @@ import "./App.css";
 import HebrewKeyboard from "./components/HebrewKeyboard";
 import EnglishKeyboard from "./components/EnglishKeyboard";
 import OptionsKeyboard from "./components/OptionsKeyboard";
+import SpecialChars from "./components/specialChars";
+import EmojiesKeyboard from "./components/EmojiesKeyboard";
 
 export default class App extends Component {
   constructor(props) {
@@ -17,18 +19,21 @@ export default class App extends Component {
       fontSize: "16px",
       fontName: "Arial",
       color: "black",
-      alignment: "left"
+      alignment: "left",
+      undo: "",
     };
   }
 
   //Style function
   boldUpdate = () => { this.setState({isBold: !this.state.isBold});}
-  underlineUpdate = () => {console.log("underline!"); this.setState({underline: !this.state.underline});}
+  underlineUpdate = () => {this.setState({underline: !this.state.underline});}
   italicUpdate = () => { this.setState({italic: !this.state.italic});}
 
   fontSizeUpdate = (event)=>{this.setState({fontSize: event.target.value})}
   fontNameUpdate = (event)=>{this.setState({fontName: event.target.value})}
   colorUpdate = (event)=>{this.setState({color: event.target.value})}
+
+  undoUpdate = ()=>{this.setState({undo: !this.state.undo});}
 
   alignFullUpdate =()   =>  {this.setState(   {alignment: "justify"}   );}
   alignCenterUpdate =() =>  {this.setState(   {alignment: "center"}    );}
@@ -46,7 +51,8 @@ export default class App extends Component {
       boldC: this.state.isBold? 'bold' : '',
       underline: this.state.underline? 'underline':'',
       italic: this.state.italic? 'italic':'',
-      align: this.state.alignment
+      align: this.state.alignment,
+      undo: this.state.undo
 
   }
     this.setState((prev)=> ({ inputValue: [...prev.inputValue, designChar ] }));
@@ -80,6 +86,7 @@ export default class App extends Component {
       boldUpdate: this.boldUpdate,
       underlineUpdate: this.underlineUpdate,
       italicUpdate: this.italicUpdate,
+      undoUpdate: this.undoUpdate,
       fontNameUpdate: this.fontNameUpdate,
       fontSizeUpdate: this.fontSizeUpdate,
       alignFullUpdate: this.alignFullUpdate,
@@ -90,14 +97,9 @@ export default class App extends Component {
     }
 
     const { capsLockOn } = this.state;
-    const { inputValue, output, bold } = this.state;
+    // const { inputValue, output, bold } = this.state;
 
     const numbers = "0123456789";
-    // const emojy1 = "😀😁😂🤣😃😄😅😆😉😊";
-    // const emojy2 = "😋😎😍😘🥰😗😙🥲😚☺️";
-    const specials1 = "!@#$%^&*()-_=+";
-    const specials2 = "/'[]{};:?.,";
-
     const NumKeys = this.inputButtons(numbers);
 
     let input=[...this.state.inputValue];
@@ -135,6 +137,7 @@ export default class App extends Component {
                   hebrewKeyboard.style.visibility === "collapse"
                     ? "visible"
                     : "collapse";
+                
 
               }}
             >
@@ -148,6 +151,7 @@ export default class App extends Component {
                   englishKeyboard.style.visibility === "collapse"
                     ? "visible"
                     : "collapse";
+                
               }}
             >
               English
@@ -164,6 +168,31 @@ export default class App extends Component {
             >
               Numbers
             </button>
+            <button
+              onClick={() => {
+                const specialChars =
+                  document.querySelector(".SpecialChars");
+                specialChars.style.visibility =
+                  specialChars.style.visibility === "collapse"
+                    ? "visible"
+                    : "collapse";
+              }}
+            >
+              Specials
+            </button>
+            <button
+              onClick={() => {
+                const emojies =
+                  document.querySelector(".EmojiesKeyboard");
+                  emojies.style.visibility =
+                  emojies.style.visibility === "collapse"
+                    ? "visible"
+                    : "collapse";
+              }}
+            >
+              Emojies
+            </button>
+
           </div>
 
           <div className="KeyboardOptions">
@@ -186,6 +215,10 @@ export default class App extends Component {
 
           <EnglishKeyboard capsLockOn={this.state.capsLockOn} inputButtons={this.inputButtons} />
           <HebrewKeyboard func={this.inputButtons} />
+          <SpecialChars input={this.inputButtons} />
+          <EmojiesKeyboard emoj={this.inputButtons} />
+
+
 
         </div>
       </div>

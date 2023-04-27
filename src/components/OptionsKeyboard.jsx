@@ -10,6 +10,7 @@ export default class OptionsKeyboard extends Component {
     boldUpdate = () => { this.props.styleFunctionsProp.boldUpdate(); }
     italicUpdate = () => { this.props.styleFunctionsProp.italicUpdate(); }
     underlineUpdate = () => { this.props.styleFunctionsProp.underlineUpdate(); }
+    undoUpdate = () => { this.props.styleFunctionsProp.undoUpdate(); }
     alignLeftUpdate = () => { this.props.styleFunctionsProp.alignLeftUpdate(); }
     alignRightUpdate = () => { this.props.styleFunctionsProp.alignRightUpdate(); }
     alignCenterUpdate = () => { this.props.styleFunctionsProp.alignCenterUpdate(); }
@@ -28,8 +29,8 @@ export default class OptionsKeyboard extends Component {
                 <button id="underline" onClick={this.underlineUpdate} className="option-button format"><i className="fa-solid fa-underline"></i></button>
 
                 { /*Undo-Redo*/}
-                <button id="undo" className="option-button"><i className="fa-solid fa-rotate-left"></i></button>
-                <button id="redo" className="option-button"><i className="fa-solid fa-rotate-right"></i></button>
+                <button id="undo" onClick={this.undoUpdate} className="option-button"><i className="fa-solid fa-rotate-left"></i></button>
+                {/* <button id="redo" className="option-button"><i className="fa-solid fa-rotate-right"></i></button> */}
 
                 {/* Alignment */}
                 <button id="justigyLeft" onClick={this.alignLeftUpdate} className="option-button align"><i className=" fa-solid fa-align-left"></i></button>
@@ -56,7 +57,7 @@ export default class OptionsKeyboard extends Component {
                 {/* Color */}
                 <div className="input-wrapper">
                     <input type="color" id="foreColor"  onChange={this.colorUpdate} className="adv-option-button"></input>
-                    <label htmlFor="foreColor">Font Color</label>
+                    <label className="font-color" htmlFor="foreColor"> Font Color</label>
                 </div>
             </div>
 
