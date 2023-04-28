@@ -153,11 +153,11 @@ export default class App extends Component {
             <div className="KeyboardInputs">
               <button
                 onClick={() => {
+                  const englishKeyboard =
+                    document.querySelector(".EngKeyboard");
                   const hebrewKeyboard = document.querySelector(".HebKeyboard");
-                  hebrewKeyboard.style.visibility =
-                    hebrewKeyboard.style.visibility === "collapse"
-                      ? "visible"
-                      : "collapse";
+                  hebrewKeyboard.style.visibility = "visible";
+                  englishKeyboard.style.visibility = "collapse";
                 }}
               >
                 Hebrew
@@ -166,10 +166,9 @@ export default class App extends Component {
                 onClick={() => {
                   const englishKeyboard =
                     document.querySelector(".EngKeyboard");
-                  englishKeyboard.style.visibility =
-                    englishKeyboard.style.visibility === "collapse"
-                      ? "visible"
-                      : "collapse";
+                  const hebrewKeyboard = document.querySelector(".HebKeyboard");
+                  englishKeyboard.style.visibility = "visible";
+                  hebrewKeyboard.style.visibility = "collapse";
                 }}
               >
                 English
