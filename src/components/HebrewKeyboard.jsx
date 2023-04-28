@@ -1,31 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import "../App.css";
 
-
 class HebrewKeyboard extends Component {
-    constructor(props) {
-        super(props);
-    }
-    
-    render() {
+  constructor(props) {
+    super(props);
+  }
 
-        const HebAlphabet1 = "קראטוןםפ";
-        const HebAlphabet2 = "שדגכעיחלךף";
-        const HebAlphabet3 = "זסבהנמצתץ";
+  render() {
+    const HebAlphabet1 = "קראטוןםפ";
+    const HebAlphabet2 = "שדגכעיחלךף";
+    const HebAlphabet3 = "זסבהנמצתץ";
 
-        const HebKeys1 = this.props.func(HebAlphabet1);
-        const HebKeys2 = this.props.func(HebAlphabet2);
-        const HebKeys3 = this.props.func(HebAlphabet3);
+    const HebKeys1 = this.props.func(HebAlphabet1);
+    const HebKeys2 = this.props.func(HebAlphabet2);
+    const HebKeys3 = this.props.func(HebAlphabet3);
 
-        return (
-                <div className="HebKeyboard" style={{ visibility: "visible" }}>
-                    <div>{HebKeys1}</div>
-                    <div>{HebKeys2}</div>
-                    <div>{HebKeys3}</div>
-                </div>
-
-        );
-    }
+    return (
+      <div className="HebKeyboard" style={{ visibility: "visible" }}>
+        <div>{HebKeys1}</div>
+        <div>{HebKeys2}</div>
+        <div>{HebKeys3}</div>
+      </div>
+    );
+  }
 }
 
 export default HebrewKeyboard;

@@ -189,9 +189,9 @@ export default class App extends Component {
                 onClick={() => {
                   const specialChars = document.querySelector(".SpecialChars");
                   specialChars.style.visibility =
-                    specialChars.style.visibility === "collapse"
-                      ? "visible"
-                      : "collapse";
+                    specialChars.style.visibility === "visible"
+                      ? "collapse"
+                      : "visible";
                 }}
               >
                 Specials
@@ -200,9 +200,9 @@ export default class App extends Component {
                 onClick={() => {
                   const emojies = document.querySelector(".EmojiesKeyboard");
                   emojies.style.visibility =
-                    emojies.style.visibility === "collapse"
-                      ? "visible"
-                      : "collapse";
+                    emojies.style.visibility === "visible"
+                      ? "collapse"
+                      : "visible";
                 }}
               >
                 Emojies
