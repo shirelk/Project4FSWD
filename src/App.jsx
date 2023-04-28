@@ -25,21 +25,42 @@ export default class App extends Component {
   }
 
   //Style function
-  boldUpdate = () => { this.setState({isBold: !this.state.isBold});}
-  underlineUpdate = () => {this.setState({underline: !this.state.underline});}
-  italicUpdate = () => { this.setState({italic: !this.state.italic});}
+  boldUpdate = () => {
+    this.setState({ isBold: !this.state.isBold });
+  };
+  underlineUpdate = () => {
+    this.setState({ underline: !this.state.underline });
+  };
+  italicUpdate = () => {
+    this.setState({ italic: !this.state.italic });
+  };
 
-  fontSizeUpdate = (event)=>{this.setState({fontSize: event.target.value})}
-  fontNameUpdate = (event)=>{this.setState({fontName: event.target.value})}
-  colorUpdate = (event)=>{this.setState({color: event.target.value})}
+  fontSizeUpdate = (event) => {
+    this.setState({ fontSize: event.target.value });
+  };
+  fontNameUpdate = (event) => {
+    this.setState({ fontName: event.target.value });
+  };
+  colorUpdate = (event) => {
+    this.setState({ color: event.target.value });
+  };
 
-  undoUpdate = ()=>{this.setState({undo: !this.state.undo});}
+  undoUpdate = () => {
+    this.setState({ undo: !this.state.undo });
+  };
 
-  alignFullUpdate =()   =>  {this.setState(   {alignment: "justify"}   );}
-  alignCenterUpdate =() =>  {this.setState(   {alignment: "center"}    );}
-  alignRightUpdate =()  =>  {this.setState(   {alignment: "right"}     );}
-  alignLeftUpdate =()   =>  {this.setState(   {alignment: "left"}      );}
-
+  alignFullUpdate = () => {
+    this.setState({ alignment: "justify" });
+  };
+  alignCenterUpdate = () => {
+    this.setState({ alignment: "center" });
+  };
+  alignRightUpdate = () => {
+    this.setState({ alignment: "right" });
+  };
+  alignLeftUpdate = () => {
+    this.setState({ alignment: "left" });
+  };
 
   //object the hold the fields of the style functions
   setInputValue = (newChar) => {
@@ -48,14 +69,13 @@ export default class App extends Component {
       fontSize: this.state.fontSize,
       fontName: this.state.fontName,
       color: this.state.color,
-      boldC: this.state.isBold? 'bold' : '',
-      underline: this.state.underline? 'underline':'',
-      italic: this.state.italic? 'italic':'',
+      boldC: this.state.isBold ? "bold" : "",
+      underline: this.state.underline ? "underline" : "",
+      italic: this.state.italic ? "italic" : "",
       align: this.state.alignment,
-      undo: this.state.undo
-
-  }
-    this.setState((prev)=> ({ inputValue: [...prev.inputValue, designChar ] }));
+      undo: this.state.undo,
+    };
+    this.setState((prev) => ({ inputValue: [...prev.inputValue, designChar] }));
   };
 
   handleClick = (char) => {
@@ -64,7 +84,7 @@ export default class App extends Component {
 
   // Delete button
   handleDelete = () => {
-    this.setState({inputValue: this.state.inputValue.slice(0, -1)} );
+    this.setState({ inputValue: this.state.inputValue.slice(0, -1) });
   };
 
   // Space button
@@ -80,7 +100,6 @@ export default class App extends Component {
     ));
 
   render() {
-
     //object that hold all the style funnctions
     let styleFunctions = {
       boldUpdate: this.boldUpdate,
@@ -93,8 +112,8 @@ export default class App extends Component {
       alignCenterUpdate: this.alignCenterUpdate,
       alignRightUpdate: this.alignRightUpdate,
       alignLeftUpdate: this.alignLeftUpdate,
-      colorUpdate: this.colorUpdate
-    }
+      colorUpdate: this.colorUpdate,
+    };
 
     const { capsLockOn } = this.state;
     // const { inputValue, output, bold } = this.state;
@@ -102,129 +121,123 @@ export default class App extends Component {
     const numbers = "0123456789";
     const NumKeys = this.inputButtons(numbers);
 
-    let input=[...this.state.inputValue];
+    let input = [...this.state.inputValue];
     return (
       <div className="App">
         <div className="card">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          />
 
           <div className="container">
-            <OptionsKeyboard styleFunctionsProp ={styleFunctions}  />
-            <div id="text-input" style={{textAlign: this.state.alignment}}>
-              {input.map((char) =>(
+            <OptionsKeyboard styleFunctionsProp={styleFunctions} />
+            <div id="text-input" style={{ textAlign: this.state.alignment }}>
+              {input.map((char) => (
                 <span
-                style={{ 
-                  fontWeight: `${char.boldC}`,                  
-                  textDecoration: `${char.underline}`,
-                  fontStyle: `${char.italic}`,
-                  fontSize: `${char.fontSize}px`,
-                  fontFamily: `${char.fontName}`,
-                  color: `${char.color}`,
-                }}
+                  style={{
+                    fontWeight: `${char.boldC}`,
+                    textDecoration: `${char.underline}`,
+                    fontStyle: `${char.italic}`,
+                    fontSize: `${char.fontSize}px`,
+                    fontFamily: `${char.fontName}`,
+                    color: `${char.color}`,
+                  }}
                 >
                   {char.value}
                 </span>
               ))}
             </div>
 
-          {/* keyboard */}
-          <div className="KeyboardInputs">
-            <button
-              onClick={() => {
-                const hebrewKeyboard =
-                  document.querySelector(".HebKeyboard");
-                hebrewKeyboard.style.visibility =
-                  hebrewKeyboard.style.visibility === "collapse"
-                    ? "visible"
-                    : "collapse";
-                
-
-              }}
-            >
-              Hebrew
-            </button>
-            <button
-              onClick={() => {
-                const englishKeyboard =
-                  document.querySelector(".EngKeyboard");
-                englishKeyboard.style.visibility =
-                  englishKeyboard.style.visibility === "collapse"
-                    ? "visible"
-                    : "collapse";
-                
-              }}
-            >
-              English
-            </button>
-            <button
-              onClick={() => {
-                const numbersKeyboard =
-                  document.querySelector(".NumbersKeyboard");
-                numbersKeyboard.style.visibility =
-                  numbersKeyboard.style.visibility === "collapse"
-                    ? "visible"
-                    : "collapse";
-              }}
-            >
-              Numbers
-            </button>
-            <button
-              onClick={() => {
-                const specialChars =
-                  document.querySelector(".SpecialChars");
-                specialChars.style.visibility =
-                  specialChars.style.visibility === "collapse"
-                    ? "visible"
-                    : "collapse";
-              }}
-            >
-              Specials
-            </button>
-            <button
-              onClick={() => {
-                const emojies =
-                  document.querySelector(".EmojiesKeyboard");
+            {/* keyboard */}
+            <div className="KeyboardInputs">
+              <button
+                onClick={() => {
+                  const hebrewKeyboard = document.querySelector(".HebKeyboard");
+                  hebrewKeyboard.style.visibility =
+                    hebrewKeyboard.style.visibility === "collapse"
+                      ? "visible"
+                      : "collapse";
+                }}
+              >
+                Hebrew
+              </button>
+              <button
+                onClick={() => {
+                  const englishKeyboard =
+                    document.querySelector(".EngKeyboard");
+                  englishKeyboard.style.visibility =
+                    englishKeyboard.style.visibility === "collapse"
+                      ? "visible"
+                      : "collapse";
+                }}
+              >
+                English
+              </button>
+              <button
+                onClick={() => {
+                  const numbersKeyboard =
+                    document.querySelector(".NumbersKeyboard");
+                  numbersKeyboard.style.visibility =
+                    numbersKeyboard.style.visibility === "collapse"
+                      ? "visible"
+                      : "collapse";
+                }}
+              >
+                Numbers
+              </button>
+              <button
+                onClick={() => {
+                  const specialChars = document.querySelector(".SpecialChars");
+                  specialChars.style.visibility =
+                    specialChars.style.visibility === "collapse"
+                      ? "visible"
+                      : "collapse";
+                }}
+              >
+                Specials
+              </button>
+              <button
+                onClick={() => {
+                  const emojies = document.querySelector(".EmojiesKeyboard");
                   emojies.style.visibility =
-                  emojies.style.visibility === "collapse"
-                    ? "visible"
-                    : "collapse";
-              }}
-            >
-              Emojies
-            </button>
+                    emojies.style.visibility === "collapse"
+                      ? "visible"
+                      : "collapse";
+                }}
+              >
+                Emojies
+              </button>
+            </div>
 
+            <div className="KeyboardOptions">
+              <button
+                onClick={() => {
+                  this.setState({ capsLockOn: !capsLockOn });
+                }}
+              >
+                Caps lock
+              </button>
+              <button className="space" onClick={this.handleSpace}>
+                Space
+              </button>
+              <button onClick={this.handleDelete}>Delete</button>
+            </div>
+
+            <div className="NumbersKeyboard" style={{ visibility: "visible" }}>
+              {NumKeys}
+            </div>
+
+            <EnglishKeyboard
+              capsLockOn={this.state.capsLockOn}
+              inputButtons={this.inputButtons}
+            />
+            <HebrewKeyboard func={this.inputButtons} />
+            <SpecialChars input={this.inputButtons} />
+            <EmojiesKeyboard setInputValue={this.setInputValue} />
           </div>
-
-          <div className="KeyboardOptions">
-            <button
-              onClick={() => {
-                this.setState({ capsLockOn: !capsLockOn });
-              }}
-            >
-              Caps lock
-            </button>
-            <button className="space" onClick={this.handleSpace}>
-              Space
-            </button>
-            <button onClick={this.handleDelete}>Delete</button>
-          </div>
-
-          <div className="NumbersKeyboard" style={{ visibility: "visible" }}>
-            {NumKeys}
-          </div>
-
-          <EnglishKeyboard capsLockOn={this.state.capsLockOn} inputButtons={this.inputButtons} />
-          <HebrewKeyboard func={this.inputButtons} />
-          <SpecialChars input={this.inputButtons} />
-          <EmojiesKeyboard emoj={this.inputButtons} />
-
-
-
         </div>
       </div>
-    </div>
-
     );
   }
 }
-
