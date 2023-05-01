@@ -66,14 +66,10 @@ export default class EmojiesKeyboard extends Component {
       "\u{1F49B}", // Yellow heart
       "\u{1F5A4}", // Black heart
       "\u{1F9E1}", // Orange heart
-      //"\u{2764}", // Red heart
       "\u{1F90E}", // Brown heart
       "\u{1F90D}", // White heart
       "\u{1F49C}", // Purple heart
     ];
-
-    // const EmojKeys1 = this.props.emoj(emojy1);
-    // const EmojKeys2 = this.props.emoj(emojy2);
 
     return (
       <div className="EmojiesKeyboard" style={{ visibility: "hidden" }}>

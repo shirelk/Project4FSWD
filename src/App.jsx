@@ -17,7 +17,7 @@ export default class App extends Component {
       output: "",
       isBold: false,
       fontSize: "16px",
-      fontName: "Arial",
+      fontName: "Ariel",
       color: "black",
       alignment: "left",
       previousInputValues: [], //for clear All function
@@ -126,6 +126,7 @@ export default class App extends Component {
         <div className="card">
           <link
             rel="stylesheet"
+            //symbols for text options
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
           />
 
