@@ -9,7 +9,7 @@ export default class OptionsKeyboard extends Component {
   boldUpdate = () => { this.props.styleFunctionsProp.boldUpdate();};
   italicUpdate = () => { this.props.styleFunctionsProp.italicUpdate();};
   underlineUpdate = () => { this.props.styleFunctionsProp.underlineUpdate();};
-  undoUpdate = () => { this.props.styleFunctionsProp.undoUpdate();};
+  // undoUpdate = () => { this.props.styleFunctionsProp.undoUpdate();};
   clearAll =() => { this.props.styleFunctionsProp.clearAll();};
   alignLeftUpdate = () => { this.props.styleFunctionsProp.alignLeftUpdate();};
   alignRightUpdate = () => { this.props.styleFunctionsProp.alignRightUpdate();};
@@ -28,7 +28,7 @@ export default class OptionsKeyboard extends Component {
         <button id="underline" onClick={this.underlineUpdate} className="option-button format"><i className="fa-solid fa-underline"></i></button>
 
         {/*Undo-Redo*/}
-        <button id="undo" onClick={this.undoUpdate} className="option-button"><i className="fa-solid fa-rotate-left"></i></button>
+        {/* <button id="undo" onClick={this.undoUpdate} className="option-button"><i className="fa-solid fa-rotate-left"></i></button> */}
         {/* <button id="redo" className="option-button"><i className="fa-solid fa-rotate-right"></i></button> */}
         <button id="clear" onClick={this.clearAll} className="option-button"><i class="fa-solid fa-trash"></i></button>
 

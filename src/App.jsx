@@ -17,7 +17,7 @@ export default class App extends Component {
       output: "",
       isBold: false,
       fontSize: "16px",
-      fontName: "Arial",
+      fontName: "Ariel",
       color: "black",
       alignment: "left",
       previousInputValues: [], //for clear All function
@@ -71,7 +71,7 @@ export default class App extends Component {
       underline: this.state.underline ? "underline" : "",
       italic: this.state.italic ? "italic" : "",
       align: this.state.alignment,
-      undo: this.state.undo,
+      // undo: this.state.undo,
       clearAll: this.state.clearAll,
     };
     this.setState((prev) => ({ inputValue: [...prev.inputValue, designChar] }));
