@@ -20,47 +20,45 @@ export default class App extends Component {
       fontName: "Arial",
       color: "black",
       alignment: "left",
-      undo: "",
+      previousInputValues: [], //for clear All function
     };
   }
 
   //Style function
-  boldUpdate = () => {
-    this.setState({ isBold: !this.state.isBold });
-  };
-  underlineUpdate = () => {
-    this.setState({ underline: !this.state.underline });
-  };
-  italicUpdate = () => {
-    this.setState({ italic: !this.state.italic });
+  boldUpdate = () => { this.setState({ isBold: !this.state.isBold });};
+  underlineUpdate = () => { this.setState({ underline: !this.state.underline });};
+  italicUpdate = () => { this.setState({ italic: !this.state.italic });};
+
+  fontSizeUpdate = (event) => { this.setState({ fontSize: event.target.value });};
+  fontNameUpdate = (event) => { this.setState({ fontName: event.target.value });};
+  colorUpdate = (event) => { this.setState({ color: event.target.value });};
+
+  //Undo function 
+  
+  
+  setInputValue = (newChar) => {
+    const previousInputValues = [...this.state.previousInputValues, this.state.inputValue];
+    this.setState({
+      inputValue: newChar,
+      previousInputValues,
+    });
   };
 
-  fontSizeUpdate = (event) => {
-    this.setState({ fontSize: event.target.value });
-  };
-  fontNameUpdate = (event) => {
-    this.setState({ fontName: event.target.value });
-  };
-  colorUpdate = (event) => {
-    this.setState({ color: event.target.value });
-  };
-
-  undoUpdate = () => {
-    this.setState({ undo: !this.state.undo });
+  // clear All button
+  clearAll = () => {
+    const { previousInputValues } = this.state;
+    const previousInputValue = previousInputValues[previousInputValues.length - 1];
+    const updatedInputValue = previousInputValue || "";
+    this.setState({
+      inputValue: updatedInputValue,
+      previousInputValues: previousInputValues.slice(0, -1),
+    });
   };
 
-  alignFullUpdate = () => {
-    this.setState({ alignment: "justify" });
-  };
-  alignCenterUpdate = () => {
-    this.setState({ alignment: "center" });
-  };
-  alignRightUpdate = () => {
-    this.setState({ alignment: "right" });
-  };
-  alignLeftUpdate = () => {
-    this.setState({ alignment: "left" });
-  };
+  alignFullUpdate = () => { this.setState({ alignment: "justify" });};
+  alignCenterUpdate = () => { this.setState({ alignment: "center" });};
+  alignRightUpdate = () => { this.setState({ alignment: "right" });};
+  alignLeftUpdate = () => { this.setState({ alignment: "left" });};
 
   //object the hold the fields of the style functions
   setInputValue = (newChar) => {
@@ -74,6 +72,7 @@ export default class App extends Component {
       italic: this.state.italic ? "italic" : "",
       align: this.state.alignment,
       undo: this.state.undo,
+      clearAll: this.state.clearAll,
     };
     this.setState((prev) => ({ inputValue: [...prev.inputValue, designChar] }));
   };
@@ -105,7 +104,7 @@ export default class App extends Component {
       boldUpdate: this.boldUpdate,
       underlineUpdate: this.underlineUpdate,
       italicUpdate: this.italicUpdate,
-      undoUpdate: this.undoUpdate,
+      clearAll: this.clearAll,
       fontNameUpdate: this.fontNameUpdate,
       fontSizeUpdate: this.fontSizeUpdate,
       alignFullUpdate: this.alignFullUpdate,
@@ -227,10 +226,7 @@ export default class App extends Component {
               {NumKeys}
             </div>
 
-            <EnglishKeyboard
-              capsLockOn={this.state.capsLockOn}
-              inputButtons={this.inputButtons}
-            />
+            <EnglishKeyboard capsLockOn={this.state.capsLockOn} inputButtons={this.inputButtons}/>
             <HebrewKeyboard func={this.inputButtons} />
             <SpecialChars input={this.inputButtons} />
             <EmojiesKeyboard setInputValue={this.setInputValue} />
